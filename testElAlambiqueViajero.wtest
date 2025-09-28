@@ -1,0 +1,50 @@
+import elAlambiqueViajero.*
+
+describe "grupo de test de luke"{
+    test "luke empieza sin haber visitado ningun lugar"{
+        assert.equals(0, luke.cantViajes())
+    }
+
+
+    test "luke viaja a paris, vuelve con un recuerdo y suma 1 a la cant de lugares"{
+        luke.viajarA(paris)
+        assert.equals(1, luke.cantViajes())
+        assert.equals("llavero Torre Eiffel", luke.recuerdo())
+    }
+
+    test "luke viaja despues a buenos aires, vuelve con un recuerdo y suma 1 a la cant de lugares"{
+        luke.viajarA(paris)
+        luke.viajarA(buenosAires)
+        assert.equals(2, luke.cantViajes())
+        assert.equals("mate", luke.recuerdo())
+    }
+
+    test "luke viaja a bagdad y vuelve con un recuerdo de bidon de petroleo"{
+        bagdad.recuerdoNuevo("arte arabe")
+        luke.viajarA(bagdad)
+        assert.equals("arte arabe", luke.recuerdo())
+    }
+    
+    test "luke viaja a las vegas cuando hace homenaje a paris"{
+        lasVegas.homenajeA (paris)
+        luke.viajarA(lasVegas)
+        assert.equals("llavero Torre Eiffel", luke.recuerdo())
+    }
+
+    test "luke viaja 2 veces y despues no puede viajar a paris porque el alambique veloz no tiene combustible"{
+        luke.viajarA(buenosAires)
+        luke.viajarA(lasVegas)
+        assert.notThat(alambiqueVeloz.puedeFuncionar())
+        luke.viajarA(paris)
+        assert.notThat(paris.puedeLlegar(alambiqueVeloz))
+    }
+
+    test "luke vija a buenos aires con la el convertible chatarra"{
+        convertible.cambiarA(chatarra)
+        luke.cambiarVehiculo(chatarra)
+        luke.viajarA(buenosAires)
+        assert.equals(5,chatarra.cañones())
+        assert.equals("mate", luke.recuerdo())
+    }
+
+}
